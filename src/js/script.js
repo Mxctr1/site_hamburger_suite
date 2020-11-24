@@ -31,5 +31,40 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     ]
 
+    //Cette ligne sert a trouver le parametre dans le lien dans Item.html. Grave au console log on comprend mieux :)
+    var type = new URLSearchParams(window.location.search).get("type");
 
+    console.log(type);
+
+    //La premiere ligne permet de trouver le premier objet qui contient l'id qui correspond au type que l'on a choisi! (Pas trop dur a comprendre) -- La partie avec le || serta mettre pizza si le type est indéfini
+    var infoPage = informations.find(x => x.id === type) ||  "pizza";
+    console.log(infoPage);
+
+    // Permet de selectionner le titre dans la page et de le changer
+    var title = document.querySelector('.main-title');
+    title.innerHTML = infoPage.title;
+
+    // Permet de selectionner le slogan dans la page et de le changer
+    var slogan = document.querySelector('.sub-title');
+    slogan.innerHTML = infoPage.slogan;
+
+    // Permet de selectionner le slogan dans la page et de le changer
+    var description = document.querySelector(".sub-description p ");
+    description.innerHTML = infoPage.description;
+
+    // Permet de selectionner le slogan dans la page et de le changer
+    var image = document.querySelector(".sub-image img");
+    image.src = infoPage.image;
+
+    // Permet de selectionner le slogan dans la page et de le changer
+    var list = document.querySelector(".type-list");
+    list.innerHTML = "";
+
+    for(var i = 0; i< infoPage.type.length; i++){   // Permet de cree un li en boucle pour rentrer les informations petit-apetit
+        var li = document.createElement("li");
+        li.innerHTML = infoPage.type[i];
+
+        list.appendChild(li);                           // Permet d'ajouter le li dans le javascript.
+
+    }
 });
